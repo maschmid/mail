@@ -44,7 +44,6 @@ import org.jboss.seam.mail.example.Person;
 import org.jboss.seam.mail.templating.freemarker.FreeMarkerTemplate;
 import org.jboss.seam.mail.util.EmailAttachmentUtil;
 import org.jboss.seam.mail.util.MailTestUtil;
-import org.jboss.seam.mail.util.MavenArtifactResolver;
 import org.jboss.seam.mail.util.SMTPAuthenticator;
 import org.jboss.seam.solder.resourceLoader.ResourceProvider;
 import org.jboss.shrinkwrap.api.Archive;
@@ -53,6 +52,8 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.subethamail.smtp.auth.EasyAuthenticationHandlerFactory;
@@ -63,19 +64,20 @@ import org.subethamail.wiser.Wiser;
  */
 @RunWith(Arquillian.class)
 public class FreeMarkerMailMessageTest {
-    @Deployment
+    @Deployment(name="FreeMarkerMailMessageTest")
     public static Archive<?> createTestArchive() {
         Archive<?> ar = ShrinkWrap.create(WebArchive.class, "test.war")
                 .addAsResource("template.text.freemarker", "template.text.freemarker")
                 .addAsResource("template.html.freemarker", "template.html.freemarker")
                 .addPackages(true, FreeMarkerMailMessageTest.class.getPackage())
-                        // workaround for Weld EE embedded not properly reading Seam Solder jar
-                .addAsLibrary(ShrinkWrap.create(ZipImporter.class, "seam-solder-3.1.0.Beta1.jar")
-                        .importFrom(MavenArtifactResolver.resolve("org.jboss.seam.solder:seam-solder:3.1.0.Beta1")).as(JavaArchive.class))
                 .addAsLibraries(
-                        MavenArtifactResolver.resolve("org.subethamail:subethasmtp:3.1.4"),
-                        MavenArtifactResolver.resolve("org.freemarker:freemarker:2.3.16"),
-                        MavenArtifactResolver.resolve("commons-lang:commons-lang:2.4"))
+                        DependencyResolvers.use(MavenDependencyResolver.class)
+                        .loadReposFromPom("pom.xml")
+                        .artifact("org.jboss.seam.solder:seam-solder")
+                        .artifact("org.subethamail:subethasmtp")
+                        .artifact("org.freemarker:freemarker").exclusion("org.slf4j:slf4j-api")
+                        .artifact("commons-lang:commons-lang:2.4")
+                        .resolveAs(JavaArchive.class))
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         return ar;
     }

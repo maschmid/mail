@@ -63,13 +63,11 @@
         <dependency>
             <groupId>org.jboss.seam.solder</groupId>
             <artifactId>seam-solder-api</artifactId>
-            <version>3.1.0.Beta1</version>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.seam.solder</groupId>
             <artifactId>seam-solder</artifactId>
-            <version>3.1.0.Beta1</version>
         </dependency>
 
         <dependency>
@@ -133,32 +131,17 @@
             <scope>test</scope>
         </dependency>
 
-<<<<<<< HEAD
-		<dependency>
-			<groupId>org.jboss.arquillian</groupId>
-			<artifactId>arquillian-junit</artifactId>
-			<version>1.0.0.Alpha5</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.jboss.shrinkwrap</groupId>
-			<artifactId>shrinkwrap-api</artifactId>
-		</dependency>
-     
-		<dependency>
-			<groupId>org.jboss.shrinkwrap</groupId>
-			<artifactId>shrinkwrap-impl-base</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-	</dependencies>
-=======
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
             <version>${arquillian.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+           <groupId>org.jboss.shrinkwrap.resolver</groupId>
+           <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+           <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -203,12 +186,17 @@
             <version>${arquillian.ajocado.version}</version>
             <scope>test</scope>
         </dependency>
->>>>>>> First stab at fixing up tests
 
         <dependency>
             <groupId>org.subethamail</groupId>
             <artifactId>subethasmtp</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
@@ -252,11 +240,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.4.3</version>
                         <configuration>
-                            <skip>false</skip>
-                            <testNGArtifactName>none:none</testNGArtifactName>
-                            <excludes>
-                                <exclude>**/ftest/**</exclude>
-                            </excludes>
+                            <skip>true</skip>
                         </configuration>
                     </plugin>
                     <!-- Optional JBoss deployer plugin will deploy your war to a local JBoss AS container if you've declared $JBOSS_HOME in your OS -->
@@ -291,7 +275,7 @@
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
-                    <version>1.0.0.CR1</version>
+                    <version>1.0.0.CR2</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
