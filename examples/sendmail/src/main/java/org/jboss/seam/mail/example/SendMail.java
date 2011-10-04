@@ -33,7 +33,7 @@ import org.jboss.seam.mail.templating.render.RenderTemplate;
 import org.jboss.seam.mail.templating.velocity.CDIVelocityContext;
 import org.jboss.seam.mail.templating.velocity.VelocityTemplate;
 import org.jboss.seam.render.TemplateCompiler;
-import org.jboss.seam.solder.resourceLoader.ResourceProvider;
+import org.jboss.solder.resourceLoader.ResourceProvider;
 
 /**
  * @author Cody Lerum

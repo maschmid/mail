@@ -34,42 +34,19 @@
 
         <dependency>
             <groupId>org.jboss.seam.mail</groupId>
-            <artifactId>seam-mail-core-impl</artifactId>
+            <artifactId>seam-mail-impl</artifactId>
             <!-- FIXME implementation should not be required at compilation time -->
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.seam.mail</groupId>
-            <artifactId>seam-mail-velocity-impl</artifactId>
-            <scope>compile</scope>
+            <groupId>org.jboss.solder</groupId>
+            <artifactId>solder-impl</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.seam.mail</groupId>
-            <artifactId>seam-mail-freemarker-impl</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.seam.mail</groupId>
-            <artifactId>seam-mail-render-impl</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.seam.solder</groupId>
-            <artifactId>seam-solder-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.seam.solder</groupId>
-            <artifactId>seam-solder</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.seam.config</groupId>
-            <artifactId>seam-config-xml</artifactId>
+            <groupId>org.jboss.seam.render</groupId>
+            <artifactId>seam-render</artifactId>
         </dependency>
 
         <!-- Need to use the injectable logger in Weld Extensions -->
