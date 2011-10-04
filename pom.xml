@@ -14,7 +14,7 @@
     <name>Seam Mail Module</name>
 
     <properties>
-        <seam.version>3.1.0.Beta2</seam.version>
+        <seam.version>3.1.0.Beta3</seam.version>
         <freemarker.version>2.3.16</freemarker.version>
         <seam_render.version>1.0.0.Alpha3</seam_render.version>
         <velocity.version>1.6.4</velocity.version>
